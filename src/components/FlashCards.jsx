@@ -46,14 +46,14 @@ export default function FlashCards(props) {
   };
 
   return (
-    <div data-test = "flashcard">
+    <>
       {cards.map((card, index) => {
         const isAnswered = answeredCards.some((answeredCard) => answeredCard.card === card);
         const answeredCard = answeredCards.find((answeredCard) => answeredCard.card === card);
         const answerStatus = answeredCard ? answeredCard.answerStatus : null;
 
         return (
-          <Card key={index} flipped={selectedCard === card} answered={isAnswered} answerStatus={answerStatus}>
+          <Card data-test = "flashcard" key={index} flipped={selectedCard === card} answered={isAnswered} answerStatus={answerStatus}>
             {selectedCard === card ? (
               <>
                 {showAnswer ? (
@@ -96,7 +96,7 @@ export default function FlashCards(props) {
           </Card>
         );
       })}
-    </div>
+    </>
   );
 }
 
