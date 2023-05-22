@@ -32,8 +32,21 @@ export default function FlashCards(props) {
     setAnsweredCount(answeredCount + 1);
   };
 
+  const switchDataTest = (answerStatus) => {
+    switch (answerStatus) {
+      case 'correct':
+        return "zap-btn";
+      case 'incorrect':
+        return "no-btn";
+      case 'effort':
+        return "partial-btn";
+      default:
+        return "play-btn";
+    }
+  };
+
   return (
-    <>
+    <div data-test = "flashcard">
       {cards.map((card, index) => {
         const isAnswered = answeredCards.some((answeredCard) => answeredCard.card === card);
         const answeredCard = answeredCards.find((answeredCard) => answeredCard.card === card);
@@ -45,17 +58,17 @@ export default function FlashCards(props) {
               <>
                 {showAnswer ? (
                   <div className='answer'>
-                    <h1>{card.answer}</h1>
+                    <h1 data-test = "flashcard-text"> {card.answer}</h1>
                     <div>
-                      <button onClick={() => handleAnswerButtonClick(card, 'incorrect')}>
+                      <button data-test = "no-btn" onClick={() => handleAnswerButtonClick(card, 'incorrect')}>
                         <img src={error} alt="Error icon" />
                         <h2>Não lembrei</h2>
                       </button>
-                      <button onClick={() => handleAnswerButtonClick(card, 'effort')}>
+                      <button data-test = "partial-btn"onClick={() => handleAnswerButtonClick(card, 'effort')}>
                         <img src={almost} alt="Almost icon" />
                         <h2>Quase não lembrei</h2>
                       </button>
-                      <button onClick={() => handleAnswerButtonClick(card, 'correct')}>
+                      <button data-test = "zap-btn" onClick={() => handleAnswerButtonClick(card, 'correct')}>
                         <img src={correct} alt="Correct icon" />
                         <h2>Zap!</h2>
                       </button>
@@ -63,15 +76,16 @@ export default function FlashCards(props) {
                   </div>
                 ) : (
                   <>
-                    <h1>{card.question}</h1>
-                    <img src={seta} alt="Show answer" onClick={() => handleCardClick(card)} />
+                    <h1 data-test = "flashcard-text">{card.question}</h1>
+                    <img data-test = "turn-btn" src={seta} alt="Show answer" onClick={() => handleCardClick(card)} />
                   </>
                 )}
               </>
             ) : (
               <>
-                <h1 className={isAnswered ? answerStatus : ''}>{`Pergunta ${index + 1}`}</h1>
+                <h1 data-test = "flashcard-text" className={isAnswered ? answerStatus : ''}>{`Pergunta ${index + 1}`}</h1>
                 <img
+                  data-test={switchDataTest(answerStatus)}
                   src={isAnswered ? (answerStatus === 'incorrect' ? error : answerStatus === 'effort' ? almost : correct) : play}
                   alt="Play button"
                   onClick={() => handleCardClick(card)}
@@ -82,7 +96,7 @@ export default function FlashCards(props) {
           </Card>
         );
       })}
-    </>
+    </div>
   );
 }
 

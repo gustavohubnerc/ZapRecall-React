@@ -5,7 +5,7 @@ export default function Footer(props) {
   
     return (
       <Completed>
-        <h1>{`${answeredCount}/${totalCardCount} Concluídos`}</h1>
+        <h1 data-test = "footer">{`${answeredCount}/${totalCardCount} Concluídos`}</h1>
       </Completed>
     );
   }
