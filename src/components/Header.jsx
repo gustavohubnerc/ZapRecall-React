@@ -1,5 +1,6 @@
-import styled from "styled-components"
+import styled from 'styled-components'
 import logo from '../assets/logo.png'
+
 export default function Header() {
     return(
         <Title>
