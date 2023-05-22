@@ -85,8 +85,8 @@ export default function FlashCards(props) {
               <>
                 <h1 data-test = "flashcard-text" className={isAnswered ? answerStatus : ''}>{`Pergunta ${index + 1}`}</h1>
                 <img
-                  data-test={switchDataTest(answerStatus)}
                   src={isAnswered ? (answerStatus === 'incorrect' ? error : answerStatus === 'effort' ? almost : correct) : play}
+                  data-test={switchDataTest(answerStatus)}
                   alt="Play button"
                   onClick={() => handleCardClick(card)}
                   disabled={isAnswered}
